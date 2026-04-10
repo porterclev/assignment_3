@@ -20,18 +20,42 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+import csv
+
 # ---------------------------------------------------------
 # 1. Load the input files
 # ---------------------------------------------------------
 # --> add your Python code here
+INPUT_PATH = "docs.csv"
+QUERY_PATH = 'queries.csv'
 
-
+documents = []
+with open(INPUT_PATH, 'r') as csvfile:
+  reader = csv.reader(csvfile)
+  for i, row in enumerate(reader):
+        if i > 0:  # skipping the header
+           documents.append(row[1])
+        
+queries = []
+with open(QUERY_PATH, 'r') as csvfile:
+    reader = csv.reader(csvfile)
+    for i, row in enumerate(reader):
+        if i > 0: 
+            queries.append(row[1])
+            
 # ---------------------------------------------------------
 # 2. Build the TF-IDF matrix for the documents
 # ---------------------------------------------------------
 # Requirement: remove stopwords only
 # --> add your Python code here
+tfidfvectorizer = TfidfVectorizer(
+    stop_words='english'
+)
 
+training_v = tfidfvectorizer.fit_transform(documents)
+
+tfidf_tokens = tfidfvectorizer.get_feature_names_out()
+collection_df = pd.DataFrame(data=training_v.toarray(), index=[f'Doc{i}' for i in range(1, 101)], columns=tfidf_tokens)
 
 # ---------------------------------------------------------
 # 3. Process each query and compute AP values
