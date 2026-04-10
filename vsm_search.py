@@ -11,7 +11,7 @@
 #    •	Using the relevance judgments, compute Average Precision (AP) for each query. 
 #    •	Sort the queries in descending order of their AP values and report the ranking. 
 # FOR: CS 5180- Assignment #3
-# TIME SPENT: ~1 hour
+# TIME SPENT: 
 #-----------------------------------------------------------*/
 
 # importing required libraries
@@ -48,12 +48,13 @@ relevance = {}
 with open(RELEVANCE_PATH, 'r') as csvfile:
     reader = csv.reader(csvfile)
     for i, row in enumerate(reader):
-        # row[0] is query id, row[1] is doc id, row[2] is relevance (R or N)
+        # row[0] is query id, row[1] is doc id, row[2]
         if i > 0:
             rel = 1 if row[2] == 'R' else 0
-            if row[0] not in relevance: relevance[row[0]] = {}
-            relevance[row[0]][row[1]] = rel
             
+            if row[0] not in relevance:
+                relevance[row[0]] = {}
+            relevance[row[0]][row[1]] = rel
 # ---------------------------------------------------------
 # 2. Build the TF-IDF matrix for the documents
 # ---------------------------------------------------------
