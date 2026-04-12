@@ -11,7 +11,7 @@
 #    •	Using the relevance judgments, compute Average Precision (AP) for each query. 
 #    •	Sort the queries in descending order of their AP values and report the ranking. 
 # FOR: CS 5180- Assignment #3
-# TIME SPENT: 
+# TIME SPENT: ~1 hour 
 #-----------------------------------------------------------*/
 
 # importing required libraries
